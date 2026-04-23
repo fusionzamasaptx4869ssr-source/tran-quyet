@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trần Văn Quyết | Website cá nhân</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: rgba(255,255,255,0.82);
+      --text: #132238;
+      --muted: #5d6b82;
+      --line: rgba(19,34,56,0.10);
+      --accent: #0f766e;
+      --accent-2: #2563eb;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(15,118,110,0.12), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(244,247,251,0.7);
+      border-bottom: 1px solid rgba(19,34,56,0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand strong {
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+    .brand span {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .navlinks a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(19,34,56,0.08);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .navlinks a:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(15,23,42,0.08); }
+
+    main { padding: 28px 0 56px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 16px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid rgba(19,34,56,0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 420px;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-self: flex-start;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15,118,110,0.10);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 58ch;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(19,34,56,0.09);
+      font-weight: 600;
+      color: #2a3447;
+    }
+
+    .portrait {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      min-height: 420px;
+    }
+    .photo {
+      position: relative;
+      height: 420px; /* tăng chiều cao để thấy mặt */
+      background:
+        linear-gradient(180deg, rgba(2,6,23,0.00), rgba(2,6,23,0.12)),
+        url('anh.jpg') center top/cover no-repeat; /* căn lên trên để hiện mặt */
+    }
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(15,23,42,0.25));
+    }
+    .photo-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      border-top: 1px solid rgba(19,34,56,0.08);
+      background: rgba(255,255,255,0.80);
+    }
+    .photo-meta div { display: grid; gap: 4px; }
+    .photo-meta strong { font-size: 1rem; }
+    .photo-meta span { font-size: 0.92rem; color: var(--muted); }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(19,34,56,0.08);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .section {
+      margin-top: 22px;
+      padding: 28px;
+    }
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+    .section p.intro {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .info-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(248,250,252,0.95);
+      border: 1px solid rgba(19,34,56,0.08);
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 5px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      flex: 0 0 auto;
+    }
+    .info-list strong { display: block; margin-bottom: 4px; }
+    .info-list span { color: var(--muted); line-height: 1.6; }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(248,250,252,0.92);
+      border: 1px solid rgba(19,34,56,0.08);
+    }
+    .timeline-item .when {
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .timeline-item .desc { color: var(--muted); line-height: 1.65; }
+
+    .footer {
+      margin: 26px 0 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .home-placeholder {
+      padding: 30px 32px;
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      background:
+        linear-gradient(135deg, rgba(37,99,235,0.08), rgba(15,118,110,0.08)),
+        rgba(255,255,255,0.78);
+    }
+    .home-placeholder strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 920px) {
+      .hero, .grid-3 { grid-template-columns: 1fr; }
+      .portrait, .hero-copy { min-height: auto; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 20px, 1120px); }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .navlinks { justify-content: flex-start; }
+      .hero-copy, .section, .home-placeholder { padding: 20px; }
+      .photo-meta { flex-direction: column; }
+      h1 { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <strong>Trần Văn Quyết</strong>
+        <span>Website cá nhân</span>
+      </div>
+      <nav class="navlinks" aria-label="Điều hướng">
+        <a href="#home">Trang chủ</a>
+        <a href="#gioi-thieu">Giới thiệu</a>
+        <a href="#so-thich">Sở thích</a>
+        <a href="#ky-niem">Kỷ niệm</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="home" class="hero">
+      <div class="panel hero-copy">
+        <div class="eyebrow">Học sinh THPT Hưng Yên</div>
+        <h1>Trần Văn Quyết</h1>
+        <p class="lead">
+          
+        </p>
+        <div class="chips" aria-label="Thông tin nhanh">
+          <span class="chip">Ngày sinh: 27/05/2008</span>
+          <span class="chip">Quê quán: 39A - Phường Phố Hiến - TP Hưng Yên</span>
+          <span class="chip">Sở thích: game, bóng đá, đá cầu, môn tự nhiên</span>
+        </div>
+      </div>
+
+      <div class="panel portrait">
+        <div class="photo" aria-label="Ảnh đại diện"></div>
+        <div class="photo-meta">
+          <div>
+            <strong>Ảnh đại diện</strong>
+            <span>Dùng chính ảnh bạn cung cấp</span>
+          </div>
+          <div style="text-align:right;">
+            <strong>Trang cá nhân</strong>
+            <span>Thiết kế tối giản, dễ sửa</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-3" aria-label="Ba khối thông tin chính">
+      <article class="card">
+        <h2 style="margin-top:0">Thông tin</h2>
+        <ul class="info-list">
+          <li><span class="dot"></span><div><strong>Họ và tên</strong><span>Trần Văn Quyết</span></div></li>
+          <li><span class="dot"></span><div><strong>Ngày sinh</strong><span>27/05/2008</span></div></li>
+          <li><span class="dot"></span><div><strong>Quê quán</strong><span>39A - Phường Phố Hiến - thành phố Hưng Yên</span></div></li>
+          <li><span class="dot"></span><div><strong>Số điện thoại</strong><span>0356383995</span></div></li>
+          <li><span class="dot"></span><div><strong>Quốc tịch</strong><span>Việt Nam</span></div></li>
+          <li><span class="dot"></span><div><strong>Dân tộc</strong><span>Kinh</span></div></li>
+          <li><span class="dot"></span><div><strong>Tôn giáo</strong><span>Không</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card" id="gioi-thieu">
+        <h2 style="margin-top:0">Giới thiệu</h2>
+        <p class="intro">
+          
+        </p>
+        <ul class="info-list">
+          <li><span class="dot"></span><div><strong>Phong cách</strong><span>Đơn giản, rõ ràng, thực dụng</span></div></li>
+          <li><span class="dot"></span><div><strong>Mục tiêu</strong><span>Học tập ổn định, phát triển kỹ năng cá nhân</span></div></li>
+        </ul>
+      </article>
+
+      <article class="card" id="so-thich">
+        <h2 style="margin-top:0">Sở thích</h2>
+        <ul class="info-list">
+          <li><span class="dot"></span><div><strong>Chơi game</strong><span>Thư giãn sau giờ học</span></div></li>
+          <li><span class="dot"></span><div><strong>Đá bóng</strong><span>Rèn thể lực, tinh thần đồng đội</span></div></li>
+          <li><span class="dot"></span><div><strong>Đá cầu</strong><span>Môn vận động quen thuộc, linh hoạt</span></div></li>
+          <li><span class="dot"></span><div><strong>Môn tự nhiên</strong><span>Quan tâm Toán, Lý, Hóa, Sinh</span></div></li>
+        </ul>
+      </article>
+    </section>
+
+    
+<section id="home" class="home-box">
+    <h2>Trang chủ lớp</h2>
+    <p>Xem website chính thức của lớp 12E - THPT Hưng Yên</p>
+
+    <a href="https://sites.google.com/view/12e-k65-thpthungyen/trang-ch%E1%BB%A7" 
+       target="_blank" 
+       class="btn-home">
+        🚀 Truy cập trang chủ
+    </a>
+</section>
+
+    <div class="footer">Website cá nhân của Trần Văn Quyết · Thiết kế mẫu HTML/CSS một tệp</div>
+  </main>
+</body>
+</html>
